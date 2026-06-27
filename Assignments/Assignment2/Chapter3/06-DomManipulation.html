@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation & Event Delegation Demo</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-top: 0;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        input {
+            flex: 1;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            padding: 0.6rem;
+            color: white;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+        }
+
+        /* Event Delegation List Demo */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        li:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-delete {
+            background-color: transparent;
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            border-radius: 0.25rem;
+        }
+
+        .btn-delete:hover {
+            background-color: var(--danger);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>DOM Manipulation & Events</h1>
+        <p class="subtitle">Open the browser console (F12) to see output logs.</p>
+
+        <!-- Section 1: Selecting Elements -->
+        <div class="section">
+            <h2>1. Selecting Elements & Modifying Text</h2>
+            <p id="target-paragraph">This text will change when you click the button below.</p>
+            <button id="btn-change-text">Change Text Content</button>
+        </div>
+
+        <!-- Section 2: Event Delegation -->
+        <div class="section">
+            <h2>2. Event Delegation Demo</h2>
+            <p class="subtitle">Click any list item to select it, or click 'Delete' to remove it. A single listener on the parent &lt;ul&gt; handles all actions.</p>
+            
+            <div class="input-group">
+                <input type="text" id="item-input" placeholder="Type a new item name...">
+                <button id="btn-add-item">Add Item</button>
+            </div>
+
+            <ul id="item-list">
+                <li data-id="1">
+                    <span>Learn JavaScript ES6</span>
+                    <button class="btn-delete">Delete</button>
+                </li>
+                <li data-id="2">
+                    <span>Understand DOM Events</span>
+                    <button class="btn-delete">Delete</button>
+                </li>
+                <li data-id="3">
+                    <span>Master Event Delegation</span>
+                    <button class="btn-delete">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Include DOM JavaScript -->
+    <script src="06-DomManipulation.js"></script>
+</body>
+</html>

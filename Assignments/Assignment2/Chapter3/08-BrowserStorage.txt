@@ -1,0 +1,86 @@
+Browser Storage: localStorage, sessionStorage, and Cookies
+
+This guide explains the three primary methods for storing data directly in the web browser, their differences, use cases, and code syntax.
+
+--------------------------------------------------------------------------------
+
+1. Comparison Table
+
+Feature             | localStorage             | sessionStorage           | Cookies
+--------------------|--------------------------|--------------------------|-----------------------------------------
+Capacity            | ~5MB - 10MB              | ~5MB                     | ~4KB (very small)
+Expiration          | Never (until cleared)    | Tab/Session close        | Manually set (max-age or expires)
+Scope               | Same-Origin (all tabs)   | Same-Origin (tab only)   | Same-Origin & domain/path rules
+Sent to Server?     | No (client-side only)    | No (client-side only)    | Yes, sent automatically with HTTP requests
+API Ease of Use     | Easy (Storage API)       | Easy (Storage API)       | Hard (requires string parsing)
+Common Use Case     | Theme, Cart, User Settings| Temporary forms, Session  | Auth tokens, tracking identifiers
+
+--------------------------------------------------------------------------------
+
+2. localStorage
+Stores data with no expiration date. The data persists even after the browser is closed and reopened.
+
+Code Syntax:
+// 1. Set a value
+localStorage.setItem('username', 'Alice');
+localStorage.setItem('theme', 'dark');
+
+// 2. Get a value
+const user = localStorage.getItem('username');
+console.log(user); // Output: Alice
+
+// 3. Remove a specific value
+localStorage.removeItem('theme');
+
+// 4. Clear all stored items
+localStorage.clear();
+
+Note: localStorage only stores strings. To store objects, use JSON.stringify() and JSON.parse():
+const profile = { name: 'Alice', role: 'admin' };
+localStorage.setItem('userProfile', JSON.stringify(profile));
+
+const savedProfile = JSON.parse(localStorage.getItem('userProfile'));
+console.log(savedProfile.name); // Output: Alice
+
+--------------------------------------------------------------------------------
+
+3. sessionStorage
+Identical to localStorage, but data is cleared when the page session ends (when the browser tab or window is closed).
+
+Code Syntax:
+// 1. Set a value
+sessionStorage.setItem('sessionToken', 'XYZ123');
+
+// 2. Get a value
+const token = sessionStorage.getItem('sessionToken');
+console.log(token); // Output: XYZ123
+
+// 3. Remove a specific value
+sessionStorage.removeItem('sessionToken');
+
+// 4. Clear all stored items for this session
+sessionStorage.clear();
+
+--------------------------------------------------------------------------------
+
+4. Cookies
+Primarily used for server communication (session authentication, tracking). They have small storage space and are automatically sent to the server with every HTTP request.
+
+Code Syntax:
+// 1. Set a cookie (with an optional expiry date and path)
+document.cookie = "user=John Doe; expires=Thu, 18 Dec 2027 12:00:00 UTC; path=/";
+
+// 2. Get all cookies (returns a single string of all cookies separated by semicolons)
+console.log(document.cookie); // Output: "user=John Doe; otherCookie=value"
+
+// 3. Reading a specific cookie (requires string splitting or regex parsing)
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+const currentUser = getCookie('user');
+console.log(currentUser); // Output: John Doe
+
+// 4. Delete a cookie (set expires to a past date)
+document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";

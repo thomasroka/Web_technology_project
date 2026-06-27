@@ -1,0 +1,11 @@
+ES6 (ECMAScript 2015) is the version of JavaScript that introduced many modern features used in today's JavaScript, React, Node.js, and TypeScript projects.
+ Most modern JavaScript code relies heavily on ES6+ features.
+
+The content that falls under it are:
+-> Let, Const , Var
+->Arrow functions
+->Object Literals
+->Arrays: map, filter, reduce; spread/rest operators
+->DOM manipulation: selecting elements, events, event delegation
+-> Need for interactive (active) web pages; replacing Java Applets with JS
+-> Introduction to browser storage: localStorage, sessionStorage, Cookies

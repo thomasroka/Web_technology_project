@@ -1,0 +1,6 @@
+Modern JavaScript (ES6+) — Core Concepts
+* let/const, arrow functions, template literals, destructuring
+* Arrays: map, filter, reduce; spread/rest operators
+* DOM manipulation: selecting elements, events, event delegation
+* Need for interactive (active) web pages; replacing Java Applets with JS
+* Introduction to browser storage: localStorage, sessionStorage, Cookies
